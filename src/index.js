@@ -10,6 +10,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./rootReducer";
 import { fetchCurrentUser, userFetched } from "./actions/users";
+import { localeSet } from "./actions/locale";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 const store = createStore(
@@ -22,6 +23,10 @@ if (localStorage.amiciJWT) {
   store.dispatch(fetchCurrentUser());
 } else {
   store.dispatch(userFetched({}));
+}
+
+if (localStorage.amiciLang) {
+  store.dispatch(localeSet(localStorage.amiciLang));
 }
 
 ReactDOM.render(

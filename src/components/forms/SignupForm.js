@@ -7,7 +7,6 @@ class SignupForm extends Component {
   state = {
     data: {
       email: "",
-      username: "",
       password: ""
     },
     errors: {}
@@ -37,7 +36,6 @@ class SignupForm extends Component {
 
     if (!isEmail(data.email)) errors.email = "Invalid email";
     if (!data.password) errors.password = "Can't be blank";
-    if (!data.username) errors.username = "Can't be blank";
 
     return errors;
   };
@@ -60,21 +58,6 @@ class SignupForm extends Component {
             }
           />
           <div className="invalid-feedback">{errors.email}</div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={data.username}
-            onChange={this.onChange}
-            className={
-              errors.username ? "form-control is-invalid" : "form-control"
-            }
-          />
-          <div className="invalid-feedback">{errors.username}</div>
         </div>
 
         <div className="form-group">
