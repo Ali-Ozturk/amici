@@ -1,12 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Validator from "validator";
+import isEmail from "validator/lib/isEmail";
+import { Link } from "react-router-dom";
 
-class LoginForm extends React.Component {
+class SignupForm extends Component {
   state = {
     data: {
       email: "",
+      username: "",
       password: ""
     },
     errors: {}
@@ -21,7 +22,6 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
-
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props
@@ -34,8 +34,11 @@ class LoginForm extends React.Component {
 
   validate = data => {
     const errors = {};
-    if (!Validator.isEmail(data.email)) errors.email = "Invalid email";
+
+    if (!isEmail(data.email)) errors.email = "Invalid email";
     if (!data.password) errors.password = "Can't be blank";
+    if (!data.username) errors.username = "Can't be blank";
+
     return errors;
   };
 
@@ -44,9 +47,6 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        {errors.global && (
-          <div className="alert alert-danger">{errors.global}</div>
-        )}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -59,8 +59,22 @@ class LoginForm extends React.Component {
               errors.email ? "form-control is-invalid" : "form-control"
             }
           />
-
           <div className="invalid-feedback">{errors.email}</div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={data.username}
+            onChange={this.onChange}
+            className={
+              errors.username ? "form-control is-invalid" : "form-control"
+            }
+          />
+          <div className="invalid-feedback">{errors.username}</div>
         </div>
 
         <div className="form-group">
@@ -69,6 +83,7 @@ class LoginForm extends React.Component {
             type="password"
             id="password"
             name="password"
+            placeholder=""
             value={data.password}
             onChange={this.onChange}
             className={
@@ -79,22 +94,18 @@ class LoginForm extends React.Component {
         </div>
 
         <button type="submit" className="btn btn-primary btn-block">
-          Login
+          Sign Up
         </button>
-
         <small className="form-text text-center">
-          <Link to="/signup">Sign up</Link> if you don't have an account
-          <br />
-          <br />
-          <Link to="/forgot_password">Forgot Password?</Link>
+          or <Link to="/login">LOGIN</Link> if you have an account
         </small>
       </form>
     );
   }
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default LoginForm;
+export default SignupForm;
