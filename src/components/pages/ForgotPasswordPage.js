@@ -21,7 +21,14 @@ class ForgotPasswordPage extends Component {
           <div className="row align-items-center" style={{ height: "100vh" }}>
             <div className="col col-xs-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
               <div className="card">
-                <h2 className="card-header">Recover Password</h2>
+                <div className="card-header text-center">
+                  <img
+                    className="m-4 mt-5"
+                    src="images/amiciplus_logo.png"
+                    height="60"
+                  />
+                  <p className="p-2 lead text-dark">Recover password</p>
+                </div>
                 <div className="card-body">
                   {this.state.success ? (
                     <div className="alert alert-info">Email has been sent.</div>

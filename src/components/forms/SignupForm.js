@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { createUserRequest } from "../../actions/users";
 
 class SignupForm extends Component {
   state = {
@@ -11,6 +14,12 @@ class SignupForm extends Component {
     },
     errors: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: nextProps.serverErrors
+    });
+  }
 
   onChange = e =>
     this.setState({
@@ -23,11 +32,7 @@ class SignupForm extends Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+      this.props.submit(this.state.data);
     }
   };
 
@@ -46,7 +51,10 @@ class SignupForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            {" "}
+            <FormattedMessage id="field.email_firm" />
+          </label>
           <input
             type="email"
             id="email"
@@ -61,7 +69,10 @@ class SignupForm extends Component {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            {" "}
+            <FormattedMessage id="field.password" />
+          </label>
           <input
             type="password"
             id="password"
@@ -87,8 +98,16 @@ class SignupForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    serverErrors: state.formErrors.signup
+  };
+}
+
 SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default SignupForm;
+export default connect(mapStateToProps, { submit: createUserRequest })(
+  SignupForm
+);

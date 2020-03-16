@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Validator from "validator";
+import { FormattedMessage } from "react-intl";
 
 class LoginForm extends React.Component {
   state = {
@@ -48,7 +49,10 @@ class LoginForm extends React.Component {
           <div className="alert alert-danger">{errors.global}</div>
         )}
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            {" "}
+            <FormattedMessage id="field.email_firm" />
+          </label>
           <input
             type="email"
             id="email"
@@ -64,7 +68,10 @@ class LoginForm extends React.Component {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            {" "}
+            <FormattedMessage id="field.password" />
+          </label>
           <input
             type="password"
             id="password"
@@ -86,7 +93,10 @@ class LoginForm extends React.Component {
           <Link to="/signup">Sign up</Link> if you don't have an account
           <br />
           <br />
-          <Link to="/forgot_password">Forgot Password?</Link>
+          <Link to="/forgot_password">
+            {" "}
+            <FormattedMessage id="login.message.forgot_password" />
+          </Link>
         </small>
       </form>
     );

@@ -1,60 +1,95 @@
 import React from "react";
+import { Container, Row, Col, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import { FormattedMessage } from "react-intl";
+import * as glamor from "glamor";
+import glamorous from "glamorous";
+import { slideInRight } from "react-animations";
+import "../../css/test.css";
 
-const HomePage = () => (
-  <Container
-    fluid
-    style={{
-      height: "100vh",
-      color: "white",
-      background: "linear-gradient(to right, #692022, #1b1819)"
-    }}
-  >
-    <Row
-      className="align-items-center justify-content-center text-center"
-      style={{ height: "100%" }}
-    >
-      <Col xs={12} sm={6}>
-        <img
-          className="img-fluid"
-          alt="Adventurers League Logo"
-          src="http://media.wizards.com/images/dnd/playevents/DnD_ADVL.png"
-        />
-      </Col>
-      <Col
-        xs={12}
-        sm={6}
-        style={{
-          fontFamily: "'Open Sans', sans-serif"
-        }}
-      >
-        <h1
-          style={{
-            boxShadow:
-              "6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7)",
-            background: "rgba(20,12,10, .7)",
-            lineHeight: "3rem"
-          }}
-        >
-          BECOME AN ADVENTURER!
-        </h1>
-        <br />
-        <div className="text-center">
-          <Link
-            to="/signup"
-            className="btn btn-primary btn-lg"
-            style={{
-              backgroundColor: "#9c0b0e",
-              border: "none"
-            }}
-          >
-            JOIN THE PARTY!
-          </Link>
+/* TODO: Remove this but use for template for now
+const fadeIn = () => {
+  const style = glamor.css.keyframes({
+    "0%": { opacity: "0" },
+    "100%": { opacity: "1" }
+  });
+  return { animation: `${style} 1s` };
+};
+*/
+
+const FadeInDiv = glamorous.div({
+  animation: `1s ${glamor.css.keyframes(slideInRight)}`
+});
+
+const HomePage = () => {
+  return (
+    <>
+      <Nav className="container navbar navbar-expand-lg fixed-top pt-4">
+        <div>
+          <a className="navbar-brand" href="#">
+            <img src="images/amici_logo-light.png" height="40" />
+          </a>
         </div>
-      </Col>
-    </Row>
-  </Container>
-);
+      </Nav>
+
+      <section className="bg-home test">
+        <div className="home-center">
+          <div className="home-desc-center">
+            <Container>
+              <Row className="align-items-center">
+                <Col md="6" lg="7">
+                  <div className="title-heading text-center">
+                    <h1 className="text-white mb-2">
+                      <FormattedMessage id="homepage.header.text" />
+                    </h1>
+                    <div className="pt-5">
+                      <a href="#" className="m-3">
+                        <img src="images/badge-apple.png" height="50" />
+                      </a>
+                      <a href="#" className="m-3">
+                        <img src="images/badge-gplay.png" height="50" />
+                      </a>
+                    </div>
+                  </div>
+                </Col>
+                <Col lg="5" md="6" className="mt-4 pt-2">
+                  <FadeInDiv className="home-img text-md-right">
+                    <img src="images/phone_preview.png" className="img-fluid" />
+                  </FadeInDiv>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <Container>
+          <Row className="align-items-center">
+            <Col>
+              <div className="text-sm-left m-2">
+                <Link to="#" className="mr-3">
+                  <FormattedMessage id="homepage.link.help_center" />
+                </Link>
+                <Link to="#" className="mr-3">
+                  <FormattedMessage id="homepage.link.medias" />
+                </Link>
+                <Link to="#" className="mr-3">
+                  <FormattedMessage id="homepage.link.about_us" />
+                </Link>
+                <Link to="/login" className="mr-3">
+                  <FormattedMessage id="homepage.link.for_business" />
+                </Link>
+              </div>
+            </Col>
+            <Col>
+              <div className="text-sm-right"></div>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
+    </>
+  );
+};
 
 export default HomePage;

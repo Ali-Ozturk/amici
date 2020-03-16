@@ -33,7 +33,7 @@ class TopNavigation extends React.Component {
     return (
       <Navbar light expand="sm" color="faded">
         <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/">
-          Amici+
+          <img src="images/amiciplus_logo.png" height="30" />
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -44,7 +44,25 @@ class TopNavigation extends React.Component {
                 activeClassName="active"
                 to="/dashboard"
               >
-                <FormattedMessage id="nav.dashboard" default="Dashboard" />
+                <FormattedMessage id="nav.link.my_business" />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                tag={RouterNavLink}
+                activeClassName="active"
+                to="/employees"
+              >
+                <FormattedMessage id="nav.link.employees" />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                tag={RouterNavLink}
+                activeClassName="active"
+                to="/support"
+              >
+                <FormattedMessage id="nav.link.support" />
               </NavLink>
             </NavItem>
           </Nav>
@@ -65,9 +83,13 @@ class TopNavigation extends React.Component {
                 />
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>My Account</DropdownItem>
+                <DropdownItem>
+                  <FormattedMessage id="nav.link.my_account" />
+                </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={() => logout()}>Logout</DropdownItem>
+                <DropdownItem onClick={() => logout()}>
+                  <FormattedMessage id="nav.link.logout" />
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

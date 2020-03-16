@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Route } from "react-router-dom";
+import { Route, matchPath } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import Loader from "react-loader";
 import HomePage from "./components/pages/HomePage";
@@ -13,22 +13,27 @@ import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import SignupPage from "./components/pages/SignupPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
+import EmployeesPage from "./components/pages/EmployeesPage";
 import TopNavigation from "./components/navigation/TopNavigation";
-import { fetchCurrentUser } from "./actions/users";
+import { fetchCurrentUserRequest } from "./actions/users";
 import messages from "./messages";
 
 class App extends React.Component {
   componentDidMount() {
-    if (this.props.isAuthenticated) this.props.fetchCurrentUser();
+    if (this.props.isAuthenticated) this.props.fetchCurrentUserRequest();
   }
 
   render() {
     const { location, isAuthenticated, loaded, lang } = this.props;
+    const isHomepage = !!matchPath(this.props.location.pathname, {
+      path: "/",
+      exact: true
+    });
     return (
       <IntlProvider locale={lang} messages={messages[lang]}>
         <div>
           <Loader loaded={loaded}>
-            {isAuthenticated && <TopNavigation />}
+            {isAuthenticated && !isHomepage && <TopNavigation />}
             <Route location={location} path="/" exact component={HomePage} />
             <Route
               location={location}
@@ -66,6 +71,12 @@ class App extends React.Component {
               exact
               component={DashboardPage}
             />
+            <UserRoute
+              location={location}
+              path="/employees"
+              exact
+              component={EmployeesPage}
+            />
           </Loader>
         </div>
       </IntlProvider>
@@ -78,7 +89,7 @@ App.propTypes = {
     pathname: PropTypes.string.isRequired
   }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  fetchCurrentUser: PropTypes.func.isRequired,
+  fetchCurrentUserRequest: PropTypes.func.isRequired,
   loaded: PropTypes.bool.isRequired,
   lang: PropTypes.string.isRequired
 };
@@ -91,4 +102,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchCurrentUser })(App);
+export default connect(mapStateToProps, { fetchCurrentUserRequest })(App);
