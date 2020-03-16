@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { createStore, applyMiddleware } from "redux";
@@ -18,6 +18,7 @@ import {
 import { localeSet } from "./actions/locale";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 import rootSaga from "./rootSaga";
+import history from "./history";
 
 const sagaMiddleware = createSagaMiddleWare();
 
@@ -40,11 +41,11 @@ if (localStorage.amiciLang) {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <Provider store={store}>
       <Route component={App} />
     </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById("root")
 );
 
