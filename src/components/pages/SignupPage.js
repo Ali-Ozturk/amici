@@ -12,6 +12,7 @@ const SignupPage = () => (
               className="m-4 mt-5"
               src="images/amiciplus_logo.png"
               height="60"
+              alt="logo"
             />
             <p className="p-2 lead text-dark">
               {" "}

@@ -33,7 +33,7 @@ class TopNavigation extends React.Component {
     return (
       <Navbar light expand="sm" color="faded">
         <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/">
-          <img src="images/amiciplus_logo.png" height="30" />
+          <img src="images/amiciplus_logo.png" height="30" alt="logo-light" />
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

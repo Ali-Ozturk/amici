@@ -15,7 +15,7 @@ class SignupForm extends Component {
     errors: {}
   };
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     this.setState({
       errors: nextProps.serverErrors
     });

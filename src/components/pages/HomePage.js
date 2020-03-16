@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Nav, NavLink } from "react-bootstrap";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import * as glamor from "glamor";
@@ -26,9 +26,13 @@ const HomePage = () => {
     <>
       <Nav className="container navbar navbar-expand-lg fixed-top pt-4">
         <div>
-          <a className="navbar-brand" href="#">
-            <img src="images/amici_logo-light.png" height="40" />
-          </a>
+          <div className="navbar-brand">
+            <img
+              src="images/amici_logo-light.png"
+              height="40"
+              alt="logo-light"
+            />
+          </div>
         </div>
       </Nav>
 
@@ -44,17 +48,29 @@ const HomePage = () => {
                     </h1>
                     <div className="pt-5">
                       <a href="#" className="m-3">
-                        <img src="images/badge-apple.png" height="50" />
+                        <img
+                          src="images/badge-apple.png"
+                          height="50"
+                          alt="badge-apple"
+                        />
                       </a>
                       <a href="#" className="m-3">
-                        <img src="images/badge-gplay.png" height="50" />
+                        <img
+                          src="images/badge-gplay.png"
+                          height="50"
+                          alt="badge-gplay"
+                        />
                       </a>
                     </div>
                   </div>
                 </Col>
                 <Col lg="5" md="6" className="mt-4 pt-2">
                   <FadeInDiv className="home-img text-md-right">
-                    <img src="images/phone_preview.png" className="img-fluid" />
+                    <img
+                      src="images/phone_preview.png"
+                      alt="app-preview"
+                      className="img-fluid"
+                    />
                   </FadeInDiv>
                 </Col>
               </Row>
